@@ -11,12 +11,12 @@ const router = express.Router();
 router.get('/', logger, auth("admin"), userController.getUser)
 
 // Get Single user
-router.get('/:id', logger, auth("admin"), userController.getSingleUser)
+router.get('/:userId', logger, auth("admin"), userController.getSingleUser)
 
-// Update user
-router.put('/:id', logger, authorizeOwnership, auth(), userController.updateUser)
+// Update user //todo> bug
+router.put('/:userId', logger, authorizeOwnership, auth(), userController.updateUser)
 
 // Delete user
-router.delete('/:id', logger, auth("admin"), userController.deleteUser)
+router.delete('/:userId', logger, auth("admin"), userController.deleteUser)
 
 export const userRoutes = router;

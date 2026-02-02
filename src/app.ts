@@ -2,6 +2,7 @@ import { authRoutes } from './auth/auth.route.js';
 import initDb from './config/db.js';
 import express, { Request, Response } from 'express'
 import { userRoutes } from './user/user.route.js';
+import { vehicleRoutes } from './vehicle/vehicle.route.js';
 
 const app = express();
 
@@ -16,14 +17,13 @@ app.get('/api/v1', (req: Request, res: Response) => {
 })
 
 //! auth RESTful API
-app.use('/api/v1/auth', authRoutes )
+app.use('/api/v1/auth', authRoutes)
 
 //! users RESTful API
 app.use('/api/v1/users', userRoutes)
 
-
 //! vehicles RESTful API
-// app.use('/api/v1/vehicles', )
+app.use('/api/v1/vehicles', vehicleRoutes)
 
 //! bookings RESTful API
 // app.use('/api/v1/bookings', )

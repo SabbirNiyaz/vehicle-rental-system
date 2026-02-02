@@ -22,7 +22,7 @@ const getUser = async (req: Request, res: Response) => {
 
 const getSingleUser = async (req: Request, res: Response) => {
     try {
-        const result = await userServices.getSingleUser(req.params.id as string);
+        const result = await userServices.getSingleUser(req.params.userId as string);
         if (result.rows.length === 0) {
             res.status(404).json({
                 success: false,
@@ -47,7 +47,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
     try {
-        const result = await userServices.updateUser(req.body, req.params.id as string)
+        const result = await userServices.updateUser(req.body, req.params.userId as string)
         if (result.rows.length === 0) {
             res.status(404).json({
                 success: false,
@@ -74,14 +74,14 @@ const updateUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
 
     try {
-        const ex = await userServices.getSingleUser(req.params.id as string)
+        const ex = await userServices.getSingleUser(req.params.userId as string)
         if (ex.rows.length === 0) {
             return res.status(404).json({
                 success: false,
                 message: 'User not found.'
             })
         }
-        const result = await userServices.deleteUser(req.params.id as string)
+        const result = await userServices.deleteUser(req.params.userId as string)
         return res.status(200).json({
             success: true,
             message: 'User delete successfully.'
