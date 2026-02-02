@@ -18,7 +18,7 @@ const signUp = async (payload: Record<string, unknown>) => {
 const signIn = async (email: string, password: string) => {
     const result = await pool.query(`
         SELECT * FROM users
-        WHERE email=$1,` , [email]
+        WHERE email=$1` , [email]
     );
     if (result.rows.length === 0) {
         return null;
@@ -33,6 +33,7 @@ const signIn = async (email: string, password: string) => {
 
     //! Create Json Web Token (JWT)
     const token = jwt.sign({
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role

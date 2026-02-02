@@ -1,5 +1,7 @@
+import { authRoutes } from './auth/auth.route.js';
 import initDb from './config/db.js';
 import express, { Request, Response } from 'express'
+import { userRoutes } from './user/user.route.js';
 
 const app = express();
 
@@ -9,21 +11,23 @@ app.use(express.json());
 // Initialize Database
 initDb();
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/api/v1', (req: Request, res: Response) => {
     res.send("Test OK!!!")
 })
 
-// //! users RESTful API
-// app.use('/api/v1/users', )
+//! auth RESTful API
+app.use('/api/v1/auth', authRoutes )
 
-// //! vehicles RESTful API
+//! users RESTful API
+app.use('/api/v1/users', userRoutes)
+
+
+//! vehicles RESTful API
 // app.use('/api/v1/vehicles', )
 
-// //! bookings RESTful API
+//! bookings RESTful API
 // app.use('/api/v1/bookings', )
 
-// // //! auth RESTful API
-// app.use('/api/v1/auth', )
 
 //! Not Found Route Handler
 app.use((req: Request, res: Response) => {

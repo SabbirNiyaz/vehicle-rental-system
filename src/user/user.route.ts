@@ -1,22 +1,22 @@
 import express from 'express';
 import { userController } from './user.controller';
 import logger from '../middleware/logger';
+import auth from '../middleware/auth';
+import authorizeOwnership from '../middleware/authorizeOwnership';
 
 const router = express.Router();
 
-// Create user
-router.post('/create', logger, userController.createUser)
 
-// Get user
-router.get('/', logger, userController.getUser)
+// Get All user
+router.get('/', logger, auth("admin"), userController.getUser)
 
 // Get Single user
-router.get('/:id', logger, userController.getSingleUser)
+router.get('/:id', logger, auth("admin"), userController.getSingleUser)
 
 // Update user
-router.put('/update/:id', logger, userController.updateUser)
+router.put('/:id', logger, authorizeOwnership, auth(), userController.updateUser)
 
 // Delete user
-router.delete('/delete/:id', logger, userController.deleteUser)
+router.delete('/:id', logger, auth("admin"), userController.deleteUser)
 
 export const userRoutes = router;

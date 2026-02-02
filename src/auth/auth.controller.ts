@@ -46,5 +46,5 @@ const signIn = async (req: Request, res: Response) => {
 
 export const authController = {
     signUp,
-    signIn,
+    signIn
 }
