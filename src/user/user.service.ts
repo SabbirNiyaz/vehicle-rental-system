@@ -12,16 +12,48 @@ const getSingleUser = async (id: string) => {
     return result;
 }
 
-const updateUser = async (payload: Record<string, unknown>, id: string) => {
-    const { name, email, password, phone, role } = payload;
-    const hashedPass = await bcrypt.hash(password as string, 10)
-    const result = await pool.query(`
-        UPDATE users
-        SET name=$1, email=$2, password=$3, phone=$4, role=$5 
-        WHERE id =$6 RETURNING *`,
-        [name, email, hashedPass, phone, role]);
+const updateUser = async (userId: string, payload: Record<string, unknown>,
+    user: { id: number; role: "admin" | "customer" }) => {
 
-        return result;
+    const { name, email, password, phone, role } = payload;
+
+    const hashedPass = await bcrypt.hash(password as string, 10)
+
+    const findUser = await pool.query(`SELECT * FROM users WHERE id = $1`,
+        [userId]);
+
+    if (findUser.rows.length === 0) {
+        throw new Error("No user found");
+    }
+
+    // Customer update logic
+    if (user.role === "customer") {
+        if (findUser.rows[0].id !== user.id) {
+            throw new Error("Unauthorized update request");
+        }
+
+        const userUpdateResult = await pool.query(`
+        UPDATE users
+        SET name=$1, email=$2, password=$3, phone=$4
+        WHERE id =$5 
+        RETURNING id, name, email, phone, role`,
+            [name, email, hashedPass, phone, userId]);
+
+        return userUpdateResult.rows[0];
+    }
+
+    // Admin update logic
+    if (user.role === "admin") {
+        const userUpdateResult = await pool.query(`
+        UPDATE users
+        SET name=$1, email=$2, password=$3, phone=$4, role=$5
+        WHERE id =$6 
+        RETURNING id, name, email, phone, role`,
+            [name, email, hashedPass, phone, role, userId]);
+
+        return userUpdateResult.rows[0];
+    }
+
 }
 
 const deleteUser = async (id: string) => {
@@ -30,7 +62,7 @@ const deleteUser = async (id: string) => {
 }
 
 
-export const userServices ={
+export const userServices = {
     getUser,
     getSingleUser,
     updateUser,

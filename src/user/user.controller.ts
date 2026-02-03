@@ -46,26 +46,23 @@ const getSingleUser = async (req: Request, res: Response) => {
 }
 
 const updateUser = async (req: Request, res: Response) => {
+
+    const userId = req.params.userId;
+
     try {
-        const result = await userServices.updateUser(req.body, req.params.userId as string)
-        if (result.rows.length === 0) {
-            res.status(404).json({
-                success: false,
-                message: 'User not found.'
-            })
-        } else {
-            res.status(200).json({
-                success: true,
-                data: result.rows
-            })
-        }
+        const result = await userServices.updateUser(userId as string,
+            req.body, req.user as any)
+
+        return res.status(200).json({
+            success: true,
+            message: "User updated successfully",
+            data: result
+        });
 
 
     } catch (err: any) {
-        console.log("Error update user:", err);
         return res.status(400).json({
             success: false,
-            message: "Error update user",
             error: err.message
         })
     }

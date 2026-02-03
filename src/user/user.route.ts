@@ -14,7 +14,7 @@ router.get('/', logger, auth("admin"), userController.getUser)
 router.get('/:userId', logger, auth("admin"), userController.getSingleUser)
 
 // Update user //todo> bug
-router.put('/:userId', logger, authorizeOwnership, auth(), userController.updateUser)
+router.put('/:userId', logger, auth("admin", "customer"), userController.updateUser)
 
 // Delete user
 router.delete('/:userId', logger, auth("admin"), userController.deleteUser)

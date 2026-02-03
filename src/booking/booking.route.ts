@@ -12,7 +12,7 @@ router.post('/', logger, auth("admin", "customer"), bookingController.createBook
 router.get('/', logger, auth("admin", "customer"), bookingController.getBookings)
 
 //! Update Booking by role
-router.put('/:bookingId', logger, auth("admin", "customer"), bookingController.getBookings)
+router.put('/:bookingId', logger, auth("admin", "customer"), bookingController.updateBooking)
 
 
 export const bookingRoutes = router;

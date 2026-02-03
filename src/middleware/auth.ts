@@ -21,7 +21,7 @@ const auth = (...roles: string[]) => {
             if (roles.length && !roles.includes(decoded.role as string)) {
                 return res.status(401).json({
                     success: false,
-                    message: "Unauthorized: User can't access it."
+                    message: "Unauthorized: Customer can't access it."
                 })
             }
 
