@@ -39,7 +39,7 @@ const signIn = async (email: string, password: string) => {
         role: user.role
     },
         config.jwtSecret as string, {
-        expiresIn: "6h",
+        expiresIn: "30d",
     }
     );
     return { user, token }

@@ -3,6 +3,7 @@ import initDb from './config/db.js';
 import express, { Request, Response } from 'express'
 import { userRoutes } from './user/user.route.js';
 import { vehicleRoutes } from './vehicle/vehicle.route.js';
+import { bookingRoutes } from './booking/booking.route.js';
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/vehicles', vehicleRoutes)
 
 //! bookings RESTful API
-// app.use('/api/v1/bookings', )
+app.use('/api/v1/bookings', bookingRoutes)
 
 
 //! Not Found Route Handler
