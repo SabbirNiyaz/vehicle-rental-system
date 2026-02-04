@@ -91,11 +91,13 @@ The Vehicle Rental System backend API allows you to:
 
 ### Users
 
-| Method | Endpoint | Access | Description |
-|--------|---------|--------|------------|
-| GET    | /api/v1/users | Admin | Retrieve all users |
-| PUT    | /api/v1/users/:userId | Admin / Self | Update user profile or role |
-| DELETE | /api/v1/users/:userId | Admin | Delete user (if no active bookings) |
+| Method | Endpoint              | Access              | Description |
+|--------|----------------------|---------------------|-------------|
+| GET    | /api/v1/users        | Admin               | Retrieve all users |
+| GET    | /api/v1/users/:userId| Admin / Customer    | Admin can retrieve any user, customer can retrieve own profile |
+| PUT    | /api/v1/users/:userId| Admin / Customer    | Admin can update any user, customer can update own profile |
+| DELETE | /api/v1/users/:userId| Admin               | Delete user (if no active bookings) |
+
 
 ### Bookings
 
