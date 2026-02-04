@@ -4,6 +4,7 @@ import express, { Request, Response } from 'express'
 import { userRoutes } from './user/user.route.js';
 import { vehicleRoutes } from './vehicle/vehicle.route.js';
 import { bookingRoutes } from './booking/booking.route.js';
+import { endPointOverview } from './end-points-overview.js';
 
 const app = express();
 
@@ -13,8 +14,8 @@ app.use(express.json());
 // Initialize Database
 initDb();
 
-app.get('/api/v1', (req: Request, res: Response) => {
-    res.send("Vehicle Rental System!")
+app.get('/', (req: Request, res: Response) => {
+    res.send({endPointOverview})
 })
 
 //! auth RESTful API
