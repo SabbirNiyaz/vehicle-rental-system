@@ -14,7 +14,7 @@ app.use(express.json());
 initDb();
 
 app.get('/api/v1', (req: Request, res: Response) => {
-    res.send("Test OK!!!")
+    res.send("Vehicle Rental System!")
 })
 
 //! auth RESTful API

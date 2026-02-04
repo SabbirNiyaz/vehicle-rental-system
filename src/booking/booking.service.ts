@@ -1,56 +1,76 @@
 import { pool } from "../config/db";
 
 //! Create Booking
-const createBooking = async (payload: Record<string, unknown>) => {
-    const { customer_id, vehicle_id, rent_start_date,
-        rent_end_date } = payload;
+//! Create Booking
+const createBooking = async (
+    payload: Record<string, unknown>,
+    user: { id: number; role: "admin" | "customer" }
+) => {
+    const { customer_id, vehicle_id, rent_start_date, rent_end_date } = payload;
 
     const client = await pool.connect();
 
     try {
         await client.query("BEGIN");
 
-        const result = client.query(
+        // Get vehicle
+        const result = await client.query(
             `SELECT vehicle_name, daily_rent_price, availability_status
-            FROM vehicles
-            WHERE id=$1`, [vehicle_id]
+             FROM vehicles
+             WHERE id = $1`,
+            [vehicle_id]
         );
-        if ((await result).rows.length === 0) {
+
+        if (result.rows.length === 0) {
             return null;
         }
 
-        const vehicle = (await result).rows[0];
+        const vehicle = result.rows[0];
+
         if (vehicle.availability_status !== "available") {
             return false;
         }
 
-        // Calculate price
+        // Calculate days and total price
         const startDate = new Date(rent_start_date as string);
         const endDate = new Date(rent_end_date as string);
 
-        const days = Math.ceil(
-            (endDate.getTime() - startDate.getTime()) /
-            (1000 * 60 * 60 * 24)
-        );
+        const days =
+            (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
 
-        // Calculate totalPrice
-        const totalPrice = days * Number(vehicle.daily_rent_price);
+        if (days <= 0) {
+            throw new Error("Invalid rent date range");
+        }
+
+        const totalPrice = Math.ceil(days) * Number(vehicle.daily_rent_price);
+
+        // Determine customer_id safely
+        const bookingCustomerId =
+            user.role === "customer" ? user.id : (customer_id as number);
 
         // Insert booking
         const bookingResult = await client.query(`
-            INSERT INTO bookings (customer_id, vehicle_id, rent_start_date,
-            rent_end_date, total_price, status)
+            INSERT INTO bookings (
+                customer_id,
+                vehicle_id,
+                rent_start_date,
+                rent_end_date,
+                total_price,
+                status
+            )
             VALUES ($1, $2, $3, $4, $5, 'active')
-            RETURNING *`,
-            [customer_id, vehicle_id, rent_start_date,
+            RETURNING *
+            `,
+            [bookingCustomerId, vehicle_id, rent_start_date,
                 rent_end_date, totalPrice]
         );
 
         // Update vehicle status
         await client.query(
             `UPDATE vehicles
-            SET availability_status = 'booked'
-            WHERE id=$1`, [vehicle_id]
+             SET availability_status = 'booked'
+             WHERE id = $1`,
+            [vehicle_id]
         );
 
         await client.query("COMMIT");
@@ -62,14 +82,14 @@ const createBooking = async (payload: Record<string, unknown>) => {
                 daily_rent_price: vehicle.daily_rent_price,
             }
         };
-
     } catch (err: any) {
         await client.query("ROLLBACK");
-        return err.message;
+        throw err;
     } finally {
         client.release();
     }
-}
+};
+
 
 //! Get Bookings
 const getBookings = async (user: { id: number; role: "admin" | "customer" }) => {
@@ -191,7 +211,7 @@ const updateBooking = async (
         await client.query("COMMIT");
 
         // Customer Success Response
-        if (vehicle === null){
+        if (vehicle === null) {
             return updatedBookingResult.rows[0];
         }
         // Admin Success Response

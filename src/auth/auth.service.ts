@@ -9,7 +9,8 @@ const signUp = async (payload: Record<string, unknown>) => {
 
     const result = await pool.query(
         `INSERT INTO users (name, email, password, phone, role)
-        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        VALUES ($1, $2, $3, $4, $5) 
+        RETURNING id, name, email, phone, role`,
         [name, email, hashedPass, phone, role]
     );
     return result;
@@ -18,7 +19,7 @@ const signUp = async (payload: Record<string, unknown>) => {
 const signIn = async (email: string, password: string) => {
     const result = await pool.query(`
         SELECT * FROM users
-        WHERE email=$1` , [email]
+        WHERE email=$1`, [email]
     );
     if (result.rows.length === 0) {
         return null;
@@ -42,7 +43,8 @@ const signIn = async (email: string, password: string) => {
         expiresIn: "30d",
     }
     );
-    return { user, token }
+
+    return { token, user }
 }
 
 export const authServices = {

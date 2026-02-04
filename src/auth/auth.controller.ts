@@ -6,7 +6,7 @@ const signUp = async (req: Request, res: Response) => {
         const result = await authServices.signUp(req.body);
         res.status(201).json({
             success: true,
-            message: "Signup Successful",
+            message: "User registered successfully",
             data: result.rows[0]
         })
     } catch (err: any) {
@@ -31,8 +31,10 @@ const signIn = async (req: Request, res: Response) => {
         return res.status(200).json({
             success: true,
             message: "Login Successful",
-            user: result.user,
-            token: result.token
+            data:{
+                token: result.token,
+                user: result.user
+            } 
         })
 
     } catch (err: any) {

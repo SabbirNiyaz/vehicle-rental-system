@@ -4,14 +4,21 @@ import { userServices } from "./user.service"
 
 const getUser = async (req: Request, res: Response) => {
     try {
-        const result = await userServices.getUser();
+        const result = await userServices.getUser(req.user as any);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No user found."
+            })
+        }
+
         res.status(200).json({
             success: true,
             data: result.rows
         })
 
     } catch (err: any) {
-        console.log("Error get all user:", err);
         return res.status(500).json({
             success: false,
             message: "Error get all user",
@@ -85,7 +92,6 @@ const deleteUser = async (req: Request, res: Response) => {
         })
 
     } catch (err: any) {
-        console.log("Error delete user:", err);
         return res.status(400).json({
             success: false,
             message: "Error delete user",
