@@ -6,7 +6,7 @@ A **modular, scalable backend API** for managing vehicle rentals, customers, and
 
 🔗 GitHub Repo: [https://github.com/SabbirNiyaz/vehicle-rental-system](https://github.com/SabbirNiyaz/vehicle-rental-system)
 
-🔗 Deploy Live: [https://vehicle-rental-system-pied.vercel.app/](https://vehicle-rental-system-pied.vercel.app/)
+🔗 Live Deployment: [https://vehicle-rental-system-pied.vercel.app/](https://vehicle-rental-system-pied.vercel.app/)
 
 ---
 
