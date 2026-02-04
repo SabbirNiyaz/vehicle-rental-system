@@ -37,41 +37,41 @@ VEHICLE-RENTAL-SYSTEM/
 ├── node_modules/
 │
 ├── src/
-│ ├── auth/
-│ │ ├── auth.controller.ts
-│ │ ├── auth.route.ts
-│ │ └── auth.service.ts
-│ │
-│ ├── booking/
-│ │ ├── booking.controller.ts
-│ │ ├── booking.route.ts
-│ │ └── booking.service.ts
-│ │
-│ ├── config/
-│ │ ├── db.ts
-│ │ └── index.ts
-│ │
-│ ├── middleware/
-│ │ ├── auth.ts
-│ │ └── logger.ts
-│ │
-│ ├── types/
-│ │ └── express/
-│ │ └── user.d.ts
-│ │
-│ ├── user/
-│ │ ├── user.controller.ts
-│ │ ├── user.route.ts
-│ │ └── user.service.ts
-│ │
-│ ├── vehicle/
-│ │ ├── vehicle.controller.ts
-│ │ ├── vehicle.route.ts
-│ │ └── vehicle.service.ts
-│ │
-│ ├── app.ts
-│ ├── end-points-overview.ts
-│ └── server.ts
+│   ├── auth/
+│   │   ├── auth.controller.ts
+│   │   ├── auth.route.ts
+│   │   └── auth.service.ts
+│   │
+│   ├── booking/
+│   │   ├── booking.controller.ts
+│   │   ├── booking.route.ts
+│   │   └── booking.service.ts
+│   │
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── index.ts
+│   │
+│   ├── middleware/
+│   │   ├── auth.ts
+│   │   └── logger.ts
+│   │
+│   ├── types/
+│   │   └── express/
+│   │       └── user.d.ts
+│   │
+│   ├── user/
+│   │   ├── user.controller.ts
+│   │   ├── user.route.ts
+│   │   └── user.service.ts
+│   │
+│   ├── vehicle/
+│   │   ├── vehicle.controller.ts
+│   │   ├── vehicle.route.ts
+│   │   └── vehicle.service.ts
+│   │
+│   ├── app.ts
+│   ├── end-points-overview.ts
+│   └── server.ts
 │
 ├── .env
 ├── .gitignore
@@ -79,6 +79,7 @@ VEHICLE-RENTAL-SYSTEM/
 ├── package.json
 ├── tsconfig.json
 └── vercel.json
+
 
 > Modular pattern with clear separation of concerns: **routes → controllers → services → database/models → middleware → utils**  
 
