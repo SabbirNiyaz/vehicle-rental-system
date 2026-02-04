@@ -21,6 +21,20 @@ The Vehicle Rental System backend API allows you to:
 
 ---
 
+## Technology Stack
+
+- **Node.js** – JavaScript runtime environment  
+- **TypeScript** – Strongly typed JavaScript for scalable development  
+- **Express.js** – Web framework for building RESTful APIs  
+- **PostgreSQL** – Relational database  
+- **bcrypt** – Secure password hashing  
+- **jsonwebtoken (JWT)** – Token-based authentication and authorization  
+- **Postman / API Client** – API testing and request handling  
+- **Visual Studio Code** – Development IDE
+
+
+---
+
 ## 📊 Database Tables
 
 ### Users
