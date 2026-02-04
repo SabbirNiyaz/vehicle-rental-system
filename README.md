@@ -5,7 +5,8 @@
 A **modular, scalable backend API** for managing vehicle rentals, customers, and bookings, with secure role-based authentication (Admin & Customer). Built with **Node.js, TypeScript, Express, and PostgreSQL**.
 
 🔗 GitHub Repo: [https://github.com/SabbirNiyaz/vehicle-rental-system](https://github.com/SabbirNiyaz/vehicle-rental-system)
-🔗 Deploy Live: [https://github.com/SabbirNiyaz/vehicle-rental-system](https://vehicle-rental-system-pied.vercel.app/)
+
+🔗 Deploy Live: [https://vehicle-rental-system-pied.vercel.app/](https://vehicle-rental-system-pied.vercel.app/)
 
 ---
 
