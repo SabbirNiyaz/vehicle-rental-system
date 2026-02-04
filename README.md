@@ -118,6 +118,28 @@ The Vehicle Rental System backend API allows you to:
 
 ---
 
+## ⚡ Features
+
+- Modular code structure for maintainability & scalability  
+- Secure JWT authentication & role-based access  
+- Automatic booking price calculation  
+- Vehicle availability tracking & auto-return logic  
+- Complete RESTful API with structured request & response
+
+---
+
+## 📝 HTTP Status Codes
+
+- **200** – OK  
+- **201** – Created  
+- **400** – Bad Request  
+- **401** – Unauthorized  
+- **403** – Forbidden  
+- **404** – Not Found  
+- **500** – Internal Server Error  
+
+---
+
 ## 📝 Response Patterns
 
 **Success**
@@ -132,25 +154,5 @@ The Vehicle Rental System backend API allows you to:
   "message": "Error description",
   "errors": "Detailed error"
 }
-
-## 📝 HTTP Status Codes
-
-- **200** – OK  
-- **201** – Created  
-- **400** – Bad Request  
-- **401** – Unauthorized  
-- **403** – Forbidden  
-- **404** – Not Found  
-- **500** – Internal Server Error  
-
----
-
-## ⚡ Features
-
-- Modular code structure for maintainability & scalability  
-- Secure JWT authentication & role-based access  
-- Automatic booking price calculation  
-- Vehicle availability tracking & auto-return logic  
-- Complete RESTful API with structured request & response
 
 
