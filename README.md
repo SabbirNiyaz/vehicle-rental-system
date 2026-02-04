@@ -21,7 +21,7 @@ The Vehicle Rental System backend API allows you to:
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 - **Node.js** – JavaScript runtime environment  
 - **TypeScript** – Strongly typed JavaScript for scalable development  
