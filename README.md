@@ -103,7 +103,7 @@ The Vehicle Rental System backend API allows you to:
 
 | Method | Endpoint | Access | Description |
 |--------|---------|--------|------------|
-| POST   | /api/v1/bookings | Admin / Customer | Create booking & calculate total price |
+| POST   | /api/v1/bookings | Admin / Customer | Create booking with automatic total price calculation (customer: own booking, admin: any user) |
 | GET    | /api/v1/bookings | Role-based | Admin: all bookings, Customer: own bookings |
 | PUT    | /api/v1/bookings/:bookingId | Role-based | Customer: cancel, Admin: mark returned |
 
